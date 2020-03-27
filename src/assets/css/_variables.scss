@@ -1,0 +1,21 @@
+// // Bootstrap and its default variables
+// @import '../../../node_modules/bootstrap/scss/bootstrap';
+// // BootstrapVue and its default variables
+// @import '../../../node_modules/bootstrap-vue/src/index.scss';
+
+$main-color:#EB6019;
+$welcome-name : #0D0D0D;
+$welcome-text: #0D0D0D;
+
+$quick-link-text : #020100;
+
+$SourceSansPro-SemiBold : "SourceSansPro-SemiBold";
+$SourceSansPro-Regular : "SourceSansPro-Regular";
+$SourceSansPro-Light : "SourceSansPro-Light";
+$SourceSansPro-ExtraLight : "SourceSansPro-ExtraLight";
+
+// filter for card image icons to add color
+$image-icon-color : invert(49%) sepia(72%) saturate(3461%) hue-rotate(352deg) brightness(95%) contrast(93%);
+
+//Statement
+$back-home : #656565

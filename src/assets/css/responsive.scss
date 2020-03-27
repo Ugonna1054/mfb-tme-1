@@ -1,0 +1,78 @@
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+   .statement-container {
+       margin:0px  10px;
+   }
+   .container {
+    margin-right:0px !important;
+   }
+   .account-container  {
+    margin:0px  10px;
+   }
+   .middle-container  {
+    margin:0px  10px;
+   }
+   .transfer-options {
+    margin-right:0px !important;
+    padding: 0px 20px !important;
+   }
+   .cartoon-img-wrapper{
+       left : 40px
+   }
+   .tabs {
+    .active1 {
+        background: none !important;
+        margin: 1px;
+        font-family: $SourceSansPro-SemiBold;
+        color: #656565;
+    }
+    .tabs-container {
+        padding: 20px ;
+      }
+   }
+  
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .statement-container {
+        margin:0px  15px;
+    }
+    .container {
+        margin-right:0px !important;
+    }
+    .account-container  {
+        margin:0px  10px;
+    }
+    .middle-container  {
+        margin:0px  10px;
+    }
+    .transfer-options {
+        margin-right:0px !important;
+        padding: 0px 100px !important;
+       }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .transfer-options {
+        margin-right:0px !important;
+        padding: 0px 30px !important;
+       }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .transfer-options {
+        margin-right:0px !important;
+        padding: 0px 30px !important;
+    }
+ 
+}
+
+
+@media only screen and (min-width: 1025px) and (max-width: 1599px) {
+   
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 2670px) {
+    
+}
+
+

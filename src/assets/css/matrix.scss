@@ -1,0 +1,299 @@
+@font-face {
+    font-family: SourceSansPro-Regular;
+    src: url('~@/assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: SourceSansPro-SemiBold;
+    src: url('~@/assets/fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: SourceSansPro-Light;
+    src: url('~@/assets/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf');
+}
+
+@font-face {
+    font-family: SourceSansPro-ExtraLight;
+    src: url('~@/assets/fonts/Source_Sans_Pro/SourceSansPro-ExtraLight.ttf');
+}
+
+
+//Global styles
+
+//Table
+.table-responsive {
+    max-height: 500px;
+}
+table {
+    font-family: $SourceSansPro-Regular;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 15px;
+    color: #4A4A4A;
+    letter-spacing: 0;
+    td, th {
+         border: none;
+         text-align: left;
+         padding: 8px 0.5rem;
+     } 
+     tr:nth-child(even) {
+         background-color: #E5E5E5;
+     }
+}
+
+//tabs
+.tabs {
+    .current {
+        background: none !important;
+        border-bottom: 4px solid $main-color !important;
+        border-radius:1px !important;
+        padding-top: 8px !important;
+        padding-bottom: 3px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        color: black !important;
+        -webkit-transition: all .8s ease-in-out;
+        transition: all .2s ease-in-out;
+        z-index: 2;
+    }
+    
+    .active1 {
+        background: none !important;
+        margin: 15px;
+        font-family: $SourceSansPro-SemiBold;
+        color: #656565;
+    }
+
+    .tabs-container {
+        padding: 0px !important;
+      }
+}
+
+.line {
+    height: 10px;
+    width: 100%s;
+    top:73px;
+    border-top: 2px solid gainsboro;
+    margin:0px 15px;
+    position: relative;
+}
+
+//text
+.text-1 {
+font-family: $SourceSansPro-SemiBold;
+  color: #3a3636;
+}
+.text-2{
+font-family: $SourceSansPro-Light;
+  color: #121010;
+}
+
+.welcome-text {
+    color: $welcome-text;
+    font-size: 20px;
+    font-family: $SourceSansPro-SemiBold;
+    .welcome-name{
+        color: $welcome-name;
+        font-family: $SourceSansPro-Light;
+        font-size: 15px;
+    }
+}
+  
+.box-img {
+    filter: $image-icon-color ;
+}
+
+//Private stryles
+//Brain
+.brain {
+  background: whitesmoke !important;
+  .brain-children {
+      border: 2px solid green;
+      background: whitesmoke !important;
+      position: absolute;
+      width: 100%;
+      top: 100px;
+  }
+}
+
+//Headernav
+.headernav {
+    .logo-wrapper {
+        height: 100px;
+        width: 200px;
+        margin: 10px 30px 0 0;
+    }
+}
+
+//Dashboard
+.dashboard {
+    .welcome-text {
+        color: $welcome-text;
+        font-size: 20px;
+        font-family: $SourceSansPro-SemiBold;
+        .welcome-name{
+            color: $welcome-name;
+            font-family: $SourceSansPro-Light;
+            font-size: 15px;
+        }
+    }
+    .transfer-option {
+        font-family: $SourceSansPro-ExtraLight;
+        font-size: 15px;
+    }
+    .container {
+        @include card(auto, auto);
+        padding: 22px 0px;
+        margin-right: 40px;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .box {
+            @include card (60px, 60px);
+            padding: 20px 20px;
+            margin: 25px;
+            .box-img {
+                margin-bottom: 25px;
+                filter: $image-icon-color ;
+            }
+            .box-img-text {
+                color: $quick-link-text;
+                margin-left: -22px;
+                font-family: $SourceSansPro-Regular;
+            }
+        }
+        .welcome-img-wrapper {
+            height: 300px;
+            width: 20px;
+        }
+    }
+}
+
+//Statement
+.statement-container {
+    font-family: $SourceSansPro-Light;
+    @include card(auto, auto);
+    margin-right: 40px;
+    .back-home{
+        color: $back-home;
+        .icon{
+            font-size: 25px;
+        }
+        .back-text {
+            position: relative;
+            top: -4px;
+            font-family: $SourceSansPro-Regular;
+        }
+    }
+    .select-label {
+        font-family: $SourceSansPro-Light;
+        color: $welcome-text;
+        font-weight: bold;
+    }
+   .last-days-wrapper  {
+       display: flex;
+       justify-content: space-between;
+       flex-wrap: wrap;
+    .last-days {
+        @include card(40px, 130px);
+        margin: 10px 0px ;
+        padding: 10px 10px;
+        color: #333;
+        font-family: $SourceSansPro-Regular;
+    }
+   }
+    
+}
+
+//Account 
+.account-container {
+    font-family: $SourceSansPro-Light;
+    padding: 20px !important;
+    @include card(auto, auto);
+    margin-right: 40px;
+    .back-home{
+        color: $back-home;
+        .icon{
+            font-size: 25px;
+        }
+        .back-text {
+            position: relative;
+            top: -4px;
+            font-family: $SourceSansPro-Regular;
+        }
+    }
+    .box-img {
+        filter: $image-icon-color ;
+    }
+    
+    .th-1 {
+        color: $main-color;
+        font-family: $SourceSansPro-Regular;
+    }   
+}
+
+.middle-container{
+    padding: 0px !important;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .box{
+        @include card(120px, 200px);
+        margin: 10px 0px;
+        padding: 18px;
+        .card-icon{
+            float: right;
+            position: relative;
+            top: -40px;
+        }
+    }
+   .box-img {
+    filter: $image-icon-color ;
+}
+
+
+}
+
+.last-container {
+    padding: 0px !important;
+}
+
+//Transfer
+
+//options
+.transfer-options {
+    display: flex;
+    margin-right: 270px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .box {
+        @include card(180px, 170px);
+         margin: 20px 0px;
+    }
+}
+
+.cartoon-img-wrapper {
+   display: flex;
+   justify-content: flex-end;
+    width: 100%;
+    top: 0px;
+    left: 60px ;
+    position: relative;
+}
+
+//Own Account
+.own-account {
+    .box-container {
+        display: flex;
+        justify-content: space-start;
+    }
+   .box {
+    @include card(100px, 220px);
+    margin: 20px 20px 20px 0px;
+   }
+}
+
+
+
+

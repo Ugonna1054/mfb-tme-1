@@ -1,44 +1,59 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div class="dashboard">
     <main class="page-content">
-      <header class="welcome-text mb-3 ml-2 ml-lg-0">Transfer Options</header>
+      <header class="welcome-text mb-3 ml-2 ml-lg-0">Utility</header>
       <div class="transfer-options">
-        <router-link to="transferOwn">
+        <router-link to="utility-mobile">
           <div class="box hvr-grow">
-            <div class="box-text">Transfer to Own account</div>
+            <div class="box-text">Mobile Top up</div>
             <div class="img-wrapper">
               <img
-                src="../../../assets/images/circle-white.svg"
+                src="../../../assets/images/smartphone.svg"
                 class="img-fluid box-img"
-                width="40px"
+                width="60px"
                 alt
               />
             </div>
           </div>
         </router-link>
 
-        <router-link to="transferSame">
-          <div class="box hvr-grow">
-            <div class="box-text">Transfer between the same bank</div>
+        <router-link to="utility-cable">
+          <div class="box hvr-grow  box-utility">
+            <div class="box-text">Cable Tv</div>
             <div class="img-wrapper img-wrapper-2">
               <img
-                src="../../../assets/images/circle-white.svg"
-                class="img-fluid box-img"
-                width="40px"
+                src="../../../assets/images/television.svg"
+                class="img-fluid box-img box-img-2"
+                width="60px"
                 alt
               />
             </div>
           </div>
         </router-link>
 
-        <router-link to="transferOther">
+        <router-link to="utility-ecommerce">
           <div class="box hvr-grow">
-            <div class="box-text">Transfer to Other banks</div>
+            <div class="box-text">Ecommerce</div>
+            <div class="img-wrapper img-wrapper-2">
+              <img
+                src="../../../assets/images/shopping-cart.svg"
+                class="img-fluid box-img box-img-2"
+                width="60px"
+                alt
+              />
+            </div>
+          </div>
+        </router-link>
+
+        <router-link to="utility-internet">
+          <div class="box hvr-grow box-utility">
+            <div class="box-text">Internet Service</div>
             <div class="img-wrapper">
               <img
-                src="../../../assets/images/circle-white.svg"
+                src="../../../assets/images/domain.svg"
                 class="img-fluid box-img"
-                width="40px"
+                width="60px"
                 alt
               />
             </div>
@@ -46,7 +61,12 @@
         </router-link>
 
         <div class="cartoon-img-wrapper">
-          <img src="../../../assets/images/transfer-img.svg" alt height="200px" class="cartoon-img" />
+          <img
+            src="../../../assets/images/transfer-img.svg"
+            alt
+            height="200px"
+            class="cartoon-img"
+          />
         </div>
       </div>
 
@@ -84,9 +104,15 @@ export default {
 
 .box {
   cursor: pointer;
+  .box-img {
+    margin-top: 30px;
+  }
+  .box-img-2 {
+    margin-top: 50px;
+  }
 }
 .box-text {
-  width: 80px;
+  width: 120px;
   margin: 10px 15px;
   color: #333;
 }
@@ -113,4 +139,8 @@ export default {
   margin-top: 3px;
   margin-right: 20px;
 }
+
+// .mt-lg-5 {
+//   margin-top: 100px !important;
+// }
 </style>

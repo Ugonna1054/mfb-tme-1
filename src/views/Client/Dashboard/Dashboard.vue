@@ -39,8 +39,8 @@
             </div>
           </router-link>
 
-          <router-link class="link" to="#">
-            <div class="box box-4 hvr-shrink">
+          <router-link class="link" to="utility">
+            <div class="box box-4 hvr-shrink" @click="utility">
               <img src="../../../assets/images/monitor.svg" class="img-fluid box-img" alt="utility" />
               <span class="box-img-text">Utility</span>
             </div>
@@ -76,6 +76,9 @@ export default {
     },
     account() {
       this.$store.dispatch("account");
+    },
+    utility () {
+      this.$store.dispatch("utility");
     }
   },
   mounted() {

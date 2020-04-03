@@ -68,11 +68,15 @@
 
 
 @media only screen and (min-width: 1025px) and (max-width: 1599px) {
-   
+   .box-utility {
+       margin-top: 100px !important;
+   }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 2670px) {
-    
+    .box-utility {
+        margin-top: 100px !important;
+    }
 }
 
 

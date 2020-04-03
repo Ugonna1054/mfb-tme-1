@@ -58,19 +58,19 @@
               </router-link>
             </li>
             <li :class="{ active: isUtility }" @click="utility">
-              <router-link to="#">
+              <router-link to="utility">
                 <i class="icons fal fa-tv"></i>
                 <span class="event">Utility</span>
               </router-link>
             </li>
             <li :class="{ active: isLoan }" @click="loan">
-              <router-link to="#">
+              <router-link to="loan">
                 <i class="icons fal fa-credit-card"></i>
                 <span class="event">Loan</span>
               </router-link>
             </li>
             <li :class="{ active: isInvestment }" @click="invest">
-              <router-link to="#">
+              <router-link to="investment">
                 <i class="icons fas fa-receipt"></i>
                 <span class="event">Investment</span>
               </router-link>

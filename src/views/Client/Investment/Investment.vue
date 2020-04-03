@@ -28,28 +28,30 @@
         </div>
 
         <!-- table start -->
-        <table class="mt-5">
-          <tr style="color:black" class="bg-secondar">
-            <th>Amount</th>
-            <th>Tenor</th>
-            <th>Account</th>
-            <th>Agent</th>
-            <th>Date Applied</th>
-            <th>Status</th>
-          </tr>
+        <div class="table-responsive">
+          <table class="mt-5">
+            <tr style="color:black" class="bg-secondar">
+              <th>Amount</th>
+              <th>Tenor</th>
+              <th>Account</th>
+              <th>Agent</th>
+              <th>Date Applied</th>
+              <th>Status</th>
+            </tr>
 
-          <tr v-for="(loan, index) in 5" :key="index">
-            <td>&#8358; {{ formatAmount(50000) }}</td>
-            <td>2 Month(s)</td>
-            <td>0000000000</td>
-            <td>
-              Agent Black
-            </td>
-            <!-- <td v-else>Nil</td> -->
-            <td>12/03/2020</td>
-            <td>Approved</td>
-          </tr>
-        </table>
+            <tr v-for="(loan, index) in 5" :key="index">
+              <td>&#8358; {{ formatAmount(50000) }}</td>
+              <td>2 Month(s)</td>
+              <td>0000000000</td>
+              <td>
+                Agent Black
+              </td>
+              <!-- <td v-else>Nil</td> -->
+              <td>12/03/2020</td>
+              <td>Approved</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </main>
   </div>

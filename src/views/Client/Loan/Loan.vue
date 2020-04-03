@@ -28,7 +28,8 @@
         </div>
 
         <!-- table start -->
-        <table class="mt-5">
+       <div class="table-responsive">
+          <table class="mt-5">
           <tr style="color:black" class="bg-secondar">
             <th>Amount</th>
             <th>Tenor</th>
@@ -50,6 +51,7 @@
             <td>Approved</td>
           </tr>
         </table>
+       </div>
       </div>
     </main>
   </div>

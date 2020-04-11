@@ -6,199 +6,75 @@
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
-          <a href="#">pro sidebar</a>
-          <div id="close-sidebar">
+          <div id="close-sidebar" class="d-block d-md-none">
             <i class="fas fa-times"></i>
           </div>
         </div>
-        <div class="sidebar-header">
+        <div class="sidebar-headers mt-5">
           <div class="user-pic">
             <img
-              class="img-responsive img-rounded"
-              src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+              class="img-fluid"
+              src="../../assets/images/avatar.jpg"
               alt="User picture"
             />
           </div>
           <div class="user-info">
             <span class="user-name">
-              Jhon
-              <strong>Smith</strong>
-            </span>
-            <span class="user-role">Administrator</span>
-            <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Online</span>
+              Hi!
+              <strong>Admin</strong>
             </span>
           </div>
         </div>
         <!-- sidebar-header  -->
-        <div class="sidebar-search">
-          <div>
-            <div class="input-group">
-              <input type="text" class="form-control search-menu" placeholder="Search..." />
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- sidebar-search  -->
+
+        <!-- sidebar-body  -->
         <div class="sidebar-menu">
           <ul>
-            <li class="header-menu">
-              <span>General</span>
-            </li>
-            <li class="sidebar-dropdown">
-              <a href="#">
-                <i class="fa fa-tachometer-alt"></i>
+            <label class="header-menu">
+              <span>Overview</span>
+            </label>
+            <li :class="{ active: isHome }" @click="home">
+              <router-link to="/admin">
+                <i class="icons fa fa-home"></i>
                 <span class="event">Dashboard</span>
-                <span class="badge badge-pill badge-warning">New</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">
-                      Dashboard 1
-                      <span class="badge badge-pill badge-success">Pro</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard 3</a>
-                  </li>
-                </ul>
-              </div>
+              </router-link>
             </li>
-            <li class="sidebar-dropdown">
-              <a href="#">
-                <i class="fa fa-shopping-cart"></i>
-                <span>E-commerce</span>
-                <span class="badge badge-pill badge-danger">3</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">Products</a>
-                  </li>
-                  <li>
-                    <a href="#">Orders</a>
-                  </li>
-                  <li>
-                    <a href="#">Credit cart</a>
-                  </li>
-                </ul>
-              </div>
+            <li :class="{ active: isAccount }" @click="account">
+              <router-link to="/admin/user">
+                <i class="icons fa fa-user"></i>
+                <span class="event">User Management</span>
+              </router-link>
             </li>
-            <li class="sidebar-dropdown">
-              <a href="#">
-                <i class="far fa-gem"></i>
-                <span>Components</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">General</a>
-                  </li>
-                  <li>
-                    <a href="#">Panels</a>
-                  </li>
-                  <li>
-                    <a href="#">Tables</a>
-                  </li>
-                  <li>
-                    <a href="#">Icons</a>
-                  </li>
-                  <li>
-                    <a href="#">Forms</a>
-                  </li>
-                </ul>
-              </div>
+            <li :class="{ active: isTransfer }" @click="transfer">
+              <router-link to="/admin/approvals">
+                <i class="icons fa fa-check"></i>
+                <span class="event">Approvals</span>
+              </router-link>
             </li>
-            <li class="sidebar-dropdown">
-              <a href="#">
-                <i class="fa fa-chart-line"></i>
-                <span>Charts</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">Pie chart</a>
-                  </li>
-                  <li>
-                    <a href="#">Line chart</a>
-                  </li>
-                  <li>
-                    <a href="#">Bar chart</a>
-                  </li>
-                  <li>
-                    <a href="#">Histogram</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="sidebar-dropdown">
-              <a href="#">
-                <i class="fa fa-globe"></i>
-                <span>Maps</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">Google maps</a>
-                  </li>
-                  <li>
-                    <a href="#">Open street map</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="header-menu">
-              <span>Extra</span>
+            <li :class="{ active: isFund }" @click="fund">
+              <router-link to="#">
+                <i class="icons fa fa-chart-line"></i>
+                <span class="event">Financial Report</span>
+              </router-link>
             </li>
             <li>
-              <a href="#">
-                <i class="fa fa-book"></i>
-                <span>Documentation</span>
-                <span class="badge badge-pill badge-primary">Beta</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-calendar"></i>
-                <span>Calendar</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-folder"></i>
-                <span>Examples</span>
-              </a>
+              <router-link to="#">
+                <i class="icons fa fa-sign-out-alt"></i>
+                <span class="event">Logout</span>
+              </router-link>
             </li>
           </ul>
         </div>
         <!-- sidebar-menu  -->
       </div>
       <!-- sidebar-content  -->
-      <div class="sidebar-footer">
-        <a href="#">
-          <i class="fa fa-bell"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#">
-          <i class="fa fa-envelope"></i>
-          <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-          <i class="fa fa-power-off"></i>
-        </a>
+
+      <div class="diamond-wrapper">
+        <div id="diamond"></div>
+      </div>
+
+      <div class="diamond-wrapper-sm">
+        <div id="diamond-sm" class="d-none d-md-block"></div>
       </div>
     </nav>
     <!-- sidebar-wrapper  -->
@@ -210,10 +86,48 @@
 
 <script>
 import $ from "jquery";
+import { mapState } from "vuex";
 
 export default {
-  name: "Home",
+  name: "Sidenav",
   components: {},
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState({
+      isHome: state => state.Misc.isHome,
+      isAccount: state => state.Misc.isAccount,
+      isTransfer: state => state.Misc.isTransfer,
+      isFund: state => state.Misc.isFund,
+      // isUtility: state => state.Misc.isUtility,
+      // isLoan: state => state.Misc.isLoan,
+      // isInvestment: state => state.Misc.isInvestment
+    })
+  },
+  methods: {
+    home() {
+      this.$store.dispatch("home");
+    },
+    account() {
+      this.$store.dispatch("account");
+    },
+    transfer() {
+      this.$store.dispatch("transfer");
+    },
+    fund() {
+      this.$store.dispatch("fund");
+    },
+    // utility() {
+    //   this.$store.dispatch("utility");
+    // },
+    // loan() {
+    //   this.$store.dispatch("loan");
+    // },
+    // invest() {
+    //   this.$store.dispatch("investment");
+    // }
+  },
   mounted() {
     $(".sidebar-dropdown > a").click(function() {
       $(".sidebar-submenu").slideUp(200);
@@ -236,7 +150,6 @@ export default {
           .addClass("active");
       }
     });
-
     //open and close sidenav
     $("#close-sidebar").click(function() {
       $(".page-wrapper").removeClass("toggled");
@@ -248,5 +161,88 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+/* sidenav icon text */
+.event {
+  font: Regular 24px/31px "Source Sans Pro" !important;
+  color: #020100 !important;
+  opacity: 0.8;
+  font-family: "SourceSansPro-Regular";
+}
+
+/* logout icon */
+.fa-sign-out-alt {
+  margin-left: 0px;
+}
+
+/* large diamond shape */
+.diamond-wrapper {
+  position: relative;
+  margin-top: -97vh;
+  z-index: 1;
+  width: 50%;
+}
+
+#diamond {
+  width: 0;
+  height: 0;
+  border: 60px solid transparent;
+  border-bottom-color: #fbdfd1;
+  position: relative;
+  top: -60px;
+}
+#diamond:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: -60px;
+  top: 60px;
+  width: 0;
+  height: 0;
+  border: 60px solid transparent;
+  border-top-color: #fbdfd1;
+}
+
+/* small dianond shape */
+.diamond-wrapper-sm {
+  position: relative;
+  margin-top: -100px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+  width: 50%;
+  float: right;
+  padding-right: 15px;
+}
+
+#diamond-sm {
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-bottom-color: #fbdfd1;
+  position: relative;
+  top: -20px;
+}
+#diamond-sm:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: -20px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: #fbdfd1;
+}
+
+/* active nav item  */
+.active {
+  background: $main-color !important;
+  .event {
+    color: white !important;
+  }
+  i {
+    color: $main-color !important;
+  }
+}
 </style>

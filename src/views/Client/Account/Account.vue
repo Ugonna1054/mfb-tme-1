@@ -131,17 +131,6 @@ export default {
   font-family: $SourceSansPro-Regular;
 }
 
-.transaction-title {
-  font-family: $SourceSansPro-SemiBold;
-  color: #656565;
-}
-
-.middle {
-  font-family: $SourceSansPro-SemiBold;
-  font-size: 18px;
-  //color: #656565;
-}
-
 .table-img {
   display: flex;
   justify-content: flex-end;

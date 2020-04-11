@@ -99,6 +99,17 @@ font-family: $SourceSansPro-Light;
         font-size: 15px;
     }
 }
+
+.transaction-title {
+    font-family: $SourceSansPro-SemiBold;
+    color: #656565;
+  }
+  
+  .middle {
+    font-family: $SourceSansPro-SemiBold;
+    font-size: 18px;
+    //color: #656565;
+  }
   
 .box-img {
     filter: $image-icon-color ;

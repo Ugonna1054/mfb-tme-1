@@ -111,10 +111,39 @@ const routes = [
       }
     ]
   },
+  //About route
   {
     path: "/about",
     name: "About",
     component: () => import("../views/About.vue")
+  },
+  //Admin Routes
+  {
+    path: "/Admin",
+    name: "Admin",
+    component: () => import("../views/Admin/Brain/Brain.vue"),
+    children: [
+      {
+        path: "/",
+        name: "Dashboard",
+        component: () => import("../views/Admin/Dashboard/Dashboard.vue")
+      },
+      {
+        path: "/Admin/User",
+        name: "User",
+        component: () => import("../views/Admin/User/User.vue")
+      },
+      {
+        path: "/Admin/Approvals",
+        name: "Approvals",
+        component: () => import("../views/Admin/Approvals/Approvals.vue")
+      },
+      {
+        path: "/Admin/Approvals/Details",
+        name: "Details",
+        component: () => import("../views/Admin/Approvals/Details.vue")
+      }
+    ]
   }
 ];
 

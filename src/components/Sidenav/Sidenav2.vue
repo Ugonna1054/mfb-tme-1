@@ -12,11 +12,7 @@
         </div>
         <div class="sidebar-headers mt-5">
           <div class="user-pic">
-            <img
-              class="img-fluid"
-              src="../../assets/images/avatar.jpg"
-              alt="User picture"
-            />
+            <img class="img-fluid" src="../../assets/images/avatar.jpg" alt="User picture" />
           </div>
           <div class="user-info">
             <span class="user-name">
@@ -51,11 +47,27 @@
                 <span class="event">Approvals</span>
               </router-link>
             </li>
-            <li :class="{ active: isFund }" @click="fund">
-              <router-link to="#">
+            <li class="sidebar-dropdown" :class="{ active: isMisc2 }">
+              <a>
                 <i class="icons fa fa-chart-line"></i>
                 <span class="event">Financial Report</span>
-              </router-link>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li :class="{ active1: isLoan }" @click="loan">
+                    <router-link to="/admin/reports/balancesheet"><span class="event1">Balance Sheet</span> </router-link>
+                  </li>
+                  <li :class="{ active1: isInvestment }" @click="invest">
+                    <router-link to="/admin/reports/statement"> <span class="event1">Income Statement (P&L)</span> </router-link>
+                  </li>
+                  <li :class="{ active1: isUtility }" @click="utility">
+                    <router-link to="/admin/reports/ledger"><span class="event1">General Ledger</span></router-link>
+                  </li>
+                  <li :class="{ active1: isMisc1 }" @click="misc1">
+                    <router-link to="/admin/reports/trialbalance"> <span class="event1">Trial Balance</span> </router-link>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li>
               <router-link to="#">
@@ -100,9 +112,11 @@ export default {
       isAccount: state => state.Misc.isAccount,
       isTransfer: state => state.Misc.isTransfer,
       isFund: state => state.Misc.isFund,
-      // isUtility: state => state.Misc.isUtility,
-      // isLoan: state => state.Misc.isLoan,
-      // isInvestment: state => state.Misc.isInvestment
+      isUtility: state => state.Misc.isUtility,
+      isLoan: state => state.Misc.isLoan,
+      isInvestment: state => state.Misc.isInvestment,
+      isMisc1: state => state.Misc.isMisc1,
+      isMisc2: state => state.Misc.isMisc2
     })
   },
   methods: {
@@ -118,15 +132,21 @@ export default {
     fund() {
       this.$store.dispatch("fund");
     },
-    // utility() {
-    //   this.$store.dispatch("utility");
-    // },
-    // loan() {
-    //   this.$store.dispatch("loan");
-    // },
-    // invest() {
-    //   this.$store.dispatch("investment");
-    // }
+    utility() {
+      this.$store.dispatch("utility");
+    },
+    loan() {
+      this.$store.dispatch("loan");
+    },
+    invest() {
+      this.$store.dispatch("investment");
+    },
+    misc1() {
+      this.$store.dispatch("misc1");
+    },
+    misc2() {
+      this.$store.dispatch("misc2");
+    }
   },
   mounted() {
     $(".sidebar-dropdown > a").click(function() {
@@ -164,6 +184,13 @@ export default {
 <style lang="scss" scoped>
 /* sidenav icon text */
 .event {
+  font: Regular 24px/31px "Source Sans Pro" !important;
+  color: #020100 !important;
+  opacity: 0.8;
+  font-family: "SourceSansPro-Regular";
+}
+
+.event1 {
   font: Regular 24px/31px "Source Sans Pro" !important;
   color: #020100 !important;
   opacity: 0.8;
@@ -237,6 +264,9 @@ export default {
 
 /* active nav item  */
 .active {
+  li{
+    color: white  !important;
+  }
   background: $main-color !important;
   .event {
     color: white !important;
@@ -245,4 +275,33 @@ export default {
     color: $main-color !important;
   }
 }
+
+.active1 {
+  li{
+    color: white  !important;
+  }
+  background: $main-color !important;
+  .event1 {
+    color: white !important;
+  }
+  i {
+    color: $main-color !important;
+  }
+}
+
+.sidebar-dropdown {
+  cursor: pointer;
+}
+
+.sidebar-submenu {
+  background: white !important;
+}
+
+.sidebar-submenu li:hover{
+  background:$main-color !important;
+  .event1 {
+    color: #fff !important;
+  }
+ }
+
 </style>

@@ -4,6 +4,22 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
+   //Home route
+   {
+    path: "/Home",
+    name: "Home",
+    component: () => import("../views/Home/Home.vue")
+  },
+  {
+    path: "/Signup",
+    name: "Signup",
+    component: () => import("../views/Signup/Signup.vue")
+  },
+  {
+    path: "/Signin",
+    name: "Signin",
+    component: () => import("../views/Signin/Signin.vue")
+  },
   {
     path: "/",
     name: "Brain",
@@ -111,12 +127,6 @@ const routes = [
       }
     ]
   },
-  //About route
-  {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue")
-  },
   //Admin Routes
   {
     path: "/Admin",
@@ -142,6 +152,26 @@ const routes = [
         path: "/Admin/Approvals/Details",
         name: "Details",
         component: () => import("../views/Admin/Approvals/Details.vue")
+      },
+      {
+        path: "/Admin/Reports/BalanceSheet",
+        name: "Reports",
+        component: () => import("../views/Admin/Reports/BalanceSheet.vue")
+      },
+      {
+        path: "/Admin/Reports/Statement",
+        name: "Reports",
+        component: () => import("../views/Admin/Reports/IncomeStatement.vue")
+      },
+      {
+        path: "/Admin/Reports/Ledger",
+        name: "Reports",
+        component: () => import("../views/Admin/Reports/Ledger.vue")
+      },
+      {
+        path: "/Admin/Reports/TrialBalance",
+        name: "Reports",
+        component: () => import("../views/Admin/Reports/TrialBalance.vue")
       }
     ]
   }

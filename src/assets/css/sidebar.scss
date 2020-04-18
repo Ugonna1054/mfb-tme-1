@@ -461,7 +461,7 @@
   .chiller-theme .sidebar-wrapper .sidebar-header .user-info,
   .chiller-theme .sidebar-wrapper .sidebar-brand > a:hover,
   .chiller-theme .sidebar-footer > a:hover i {
-    color: #b8bfce;
+    color:whitesmoke;
   }
   
   .page-wrapper.chiller-theme.toggled #close-sidebar {
@@ -493,7 +493,7 @@
   }
   
   .chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {
-    color: #6c7b88;
+    color: #7e858b;
   }
   
   .chiller-theme .sidebar-footer {
@@ -539,3 +539,10 @@
     color: #fff  !important;
   }
  }
+
+//  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li:hover{
+//   background:$main-color;
+//   .event {
+//     color: #fff  !important;
+//   }
+//  }

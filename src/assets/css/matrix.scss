@@ -114,7 +114,12 @@ font-family: $SourceSansPro-Light;
 .box-img {
     filter: $image-icon-color ;
 }
-
+.btn-primary {
+    background: $main-color;
+    border: 1px solid $main-color;
+    font-family: $SourceSansPro-Regular;
+  }
+  
 //Private stryles
 //Brain
 .brain {

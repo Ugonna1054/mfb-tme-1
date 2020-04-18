@@ -8,7 +8,9 @@ const state = {
   isFund: false,
   isUtility: false,
   isLoan: false,
-  isInvestment: false
+  isInvestment: false,
+  isMisc1: false,
+  isMisc2:false
 };
 
 export default { state, mutations, actions };

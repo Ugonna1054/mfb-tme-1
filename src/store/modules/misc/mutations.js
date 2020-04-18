@@ -19,6 +19,12 @@ const mutations = {
   },
   SetIsInvestment(state, payload) {
     state.isInvestment = payload;
+  },
+  SetIsMisc1(state, payload) {
+    state.isMisc1 = payload;
+  },
+  SetIsMisc2(state, payload) {
+    state.isMisc2 = payload;
   }
 };
 

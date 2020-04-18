@@ -4,7 +4,7 @@
       <div class="dashboard">
         <!-- header -->
         <header class="welcome-text mb-3">
-          All Items
+          User Management
           <span class="welcome-name ml-2"></span>
         </header>
 

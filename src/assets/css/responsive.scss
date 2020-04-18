@@ -29,7 +29,18 @@
         padding: 20px ;
       }
    }
-  
+   //home navbar  top
+   .img-fluid-home{
+       margin-left: 0px !important;
+   }
+   .tme-text {
+    //border: 4px solid red;
+   // font-family: $SourceSansPro-SemiBold;
+    left: 210px!important;
+    z-index: 200;
+    top:17vh !important;
+  }
+
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -63,6 +74,12 @@
         margin-right:0px !important;
         padding: 0px 30px !important;
     }
+    .tme-text {
+        //border: 4px solid red;
+       // font-family: $SourceSansPro-SemiBold;
+        left: 510px!important;
+        z-index: 200;
+      }
  
 }
 

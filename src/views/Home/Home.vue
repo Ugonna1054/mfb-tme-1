@@ -185,12 +185,12 @@
               <br />
               <!-- <span class="mt-3 text-center mb-3">Login</span> -->
               <div class="mt-5">
-                <form action>
+                <form action   @submit.prevent="Signup">
                   <input
                     type="email"
                     class="form-control mb-4"
                     placeholder="Enter  your email to join"
-                    required
+                    
                   />
                   <p
                     class="transaction-title"
@@ -233,6 +233,9 @@ export default {
   methods: {
     Login() {
         this.$router.push("/dashboard")
+    },
+    Signup() {
+        this.$router.push("/admin")
     }
   }
 };

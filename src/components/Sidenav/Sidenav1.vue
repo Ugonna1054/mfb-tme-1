@@ -34,7 +34,7 @@
               <span>Overview</span>
             </label>
             <li :class="{ active: isHome }" @click="home">
-              <router-link to="/">
+              <router-link to="/dashboard">
                 <i class="icons fa fa-home"></i>
                 <span class="event">Home</span>
               </router-link>
@@ -76,9 +76,9 @@
               </router-link>
             </li>
             <li>
-              <router-link to="#">
+              <router-link to="/">
                 <i class="icons fa fa-sign-out-alt"></i>
-                <span class="event">Logout</span>
+                <span class="event">Logout </span>
               </router-link>
             </li>
           </ul>

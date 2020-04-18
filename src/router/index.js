@@ -6,22 +6,12 @@ Vue.use(VueRouter);
 const routes = [
    //Home route
    {
-    path: "/Home",
+    path: "/",
     name: "Home",
     component: () => import("../views/Home/Home.vue")
   },
   {
-    path: "/Signup",
-    name: "Signup",
-    component: () => import("../views/Signup/Signup.vue")
-  },
-  {
-    path: "/Signin",
-    name: "Signin",
-    component: () => import("../views/Signin/Signin.vue")
-  },
-  {
-    path: "/",
+    path: "/dashboard",
     name: "Brain",
     component: () => import("../views/Client/Brain/Brain.vue"),
     children: [

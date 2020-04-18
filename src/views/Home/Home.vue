@@ -111,7 +111,8 @@
                 TME
                 <span class="online">Online</span>
               </span>
-              <br /><span  class="small">Microfinance Banking Solution</span>
+              <br />
+              <span class="small">Microfinance Banking Solution</span>
             </p>
           </div>
           <div class>
@@ -147,9 +148,9 @@
               <br />
               <!-- <span class="mt-3 text-center mb-3">Login</span> -->
               <div class="mt-5">
-                <form action>
-                  <input type="email" class="form-control mb-4" placeholder="USERNAME" required />
-                  <input type="password" class="form-control mb-4" placeholder="PASSWORD" required />
+                <form action  @submit.prevent="Login">
+                  <input type="email" class="form-control mb-4" placeholder="USERNAME"  />
+                  <input type="password" class="form-control mb-4" placeholder="PASSWORD"  />
                   <router-link to="#" class="float-right transaction-title mb-3">Forgot password</router-link>
                   <input type="submit" value="LET'S GO" class="btn btn-primary btn-block" />
                 </form>
@@ -228,6 +229,11 @@ export default {
       ShowLogin: false,
       ShowSignup: false
     };
+  },
+  methods: {
+    Login() {
+        this.$router.push("/dashboard")
+    }
   }
 };
 </script>
@@ -393,14 +399,14 @@ input:focus {
   z-index: 200;
   top: 32vh;
 }
-.big{
-    font-size: 50px;
-    letter-spacing: 1px;
-    .online{
-        color:$main-color
-    }
+.big {
+  font-size: 50px;
+  letter-spacing: 1px;
+  .online {
+    color: $main-color;
+  }
 }
-.small{
-    color: #333;
+.small {
+  color: #333;
 }
 </style>

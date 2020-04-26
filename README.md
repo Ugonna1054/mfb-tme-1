@@ -1,4 +1,4 @@
-# frontend
+# A New Solution for MicroFinance Banks by Instiq Professional Services
 
 ## Project setup
 ```

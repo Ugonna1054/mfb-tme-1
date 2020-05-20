@@ -5,7 +5,7 @@
         <!-- header -->
         <header class="welcome-text mb-3">
           Welcome!
-          <span class="welcome-name ml-2">Smith O.Brian</span>
+          <span class="welcome-name ml-2"> {{user.lastname}} {{user.firstname}} {{user.middlename}}  </span>
         </header>
 
         <!-- main Card -->
@@ -34,21 +34,33 @@
 
           <router-link class="link" to="transfer">
             <div class="box box-3 hvr-shrink" @click="transfer">
-              <img src="../../../assets/images/send.svg" class="img-fluid box-img" alt="transfer" />
+              <img
+                src="../../../assets/images/send.svg"
+                class="img-fluid box-img"
+                alt="transfer"
+              />
               <span class="box-img-text">Transfer</span>
             </div>
           </router-link>
 
           <router-link class="link" to="utility">
             <div class="box box-4 hvr-shrink" @click="utility">
-              <img src="../../../assets/images/monitor.svg" class="img-fluid box-img" alt="utility" />
+              <img
+                src="../../../assets/images/monitor.svg"
+                class="img-fluid box-img"
+                alt="utility"
+              />
               <span class="box-img-text">Utility</span>
             </div>
           </router-link>
 
           <router-link class="link" to="account">
             <div class="box box-5 hvr-shrink" @click="account">
-              <img src="../../../assets/images/users.png" class="img-fluid box-img" alt="accounts" />
+              <img
+                src="../../../assets/images/users.png"
+                class="img-fluid box-img"
+                alt="accounts"
+              />
               <span class="box-img-text">Accounts</span>
             </div>
           </router-link>
@@ -68,8 +80,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "dashboard",
+  computed: {
+    ...mapState({
+      user: state => state.User.USER_DATA
+    })
+  },
   methods: {
     transfer() {
       this.$store.dispatch("transfer");
@@ -77,7 +96,7 @@ export default {
     account() {
       this.$store.dispatch("account");
     },
-    utility () {
+    utility() {
       this.$store.dispatch("utility");
     }
   },

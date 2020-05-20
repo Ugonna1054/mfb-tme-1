@@ -5,7 +5,7 @@ import { actions } from "./actions";
 const state = {
   USER_DATA: {},
   AUTH_TOKEN: "",
-  IS_ADMIN: false,
+  ROLE:"",
   IS_AUTHENTICATED: false,
   USER_DETAILS: {},
   TRANSACTION_DETAILS: {},

@@ -3,7 +3,7 @@ import axios from "axios";
 //https://matrixx-server.herokuapp.com/api
 //http://localhost:4000/api
 
-const baseUrl = "https://matrixx-server.herokuapp.com/api";
+const baseUrl = "http://localhost:5000/api";
 axios.defaults.baseURL = baseUrl;
 
 const ApiService = {

@@ -1,9 +1,10 @@
 import { ApiService } from "./api.services";
 
 const userService = {
-  //Login 
+
+  //Login Customer/User
   Login: (email, password) => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       ApiService.post("/auth/login", {
         email,
         password
@@ -18,9 +19,10 @@ const userService = {
     });
   },
 
+
   //Logout 
   Logout: () => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       ApiService.customRequest({
         method: "post",
         url: ApiService.getBaseUrl() + "/auth/logout"

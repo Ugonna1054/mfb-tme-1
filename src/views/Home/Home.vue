@@ -1,5 +1,6 @@
 <template>
   <div class>
+    <Loader :loading="loading" loading-text="please wait..." />
     <!-- header -->
     <div class="main-wrapper-1">
       <header>
@@ -15,7 +16,10 @@
               <!-- <span>BootstrapVue</span> -->
             </b-navbar-brand>
 
-            <b-navbar-toggle class="nav-toggle" target="nav-collapse"></b-navbar-toggle>
+            <b-navbar-toggle
+              class="nav-toggle"
+              target="nav-collapse"
+            ></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" class is-nav>
               <!-- Right aligned nav items -->
@@ -26,7 +30,11 @@
                 <b-nav-item class="nav-item" href="#" @click="ShowLogin = true">
                   <span class="text-color">Login</span>
                 </b-nav-item>
-                <b-nav-item class="nav-item" href="#" @click="ShowSignup = true">
+                <b-nav-item
+                  class="nav-item"
+                  href="#"
+                  @click="ShowSignup = true"
+                >
                   <span class="text-color join">
                     Join
                     <span class="d-none d-sm-inline">Platform</span>
@@ -148,14 +156,31 @@
               <br />
               <!-- <span class="mt-3 text-center mb-3">Login</span> -->
               <div class="mt-5">
-                <form action  @submit.prevent="Login">
-                  <input type="email" class="form-control mb-4" placeholder="USERNAME"  />
-                  <input type="password" class="form-control mb-4" placeholder="PASSWORD"  />
-                  <router-link to="#" class="float-right transaction-title mb-3">Forgot password</router-link>
-                  <input type="submit" value="LET'S GO" class="btn btn-primary btn-block" />
+                <form action @submit.prevent="Login">
+                  <input
+                    type="email"
+                    class="form-control mb-4"
+                    placeholder="EMAIL"
+                    v-model="email"
+                    required
+                  />
+                  <input
+                    type="password"
+                    class="form-control mb-4"
+                    placeholder="PASSWORD"
+                    v-model="password"
+                    required
+                  />
+                  <input
+                    type="submit"
+                    value="LET'S GO"
+                    class="btn btn-primary btn-block"
+                  />
                 </form>
                 <p class="text-center mt-5">
-                  <router-link class="reset-password" to="#">Reset Password</router-link>
+                  <router-link class="reset-password" to="ResetEmail"
+                    >Forgot Password ?</router-link
+                  >
                 </p>
               </div>
 
@@ -185,18 +210,21 @@
               <br />
               <!-- <span class="mt-3 text-center mb-3">Login</span> -->
               <div class="mt-5">
-                <form action   @submit.prevent="Signup">
+                <form action @submit.prevent="Signup">
                   <input
                     type="email"
                     class="form-control mb-4"
                     placeholder="Enter  your email to join"
-                    
                   />
-                  <p
-                    class="transaction-title"
-                    style="font-size:13px"
-                  >A password will be sent to your email, change upon first login!</p>
-                  <input type="submit" value="Join Now" class="btn btn-primary btn-block mb-4" />
+                  <p class="transaction-title" style="font-size:13px">
+                    A password will be sent to your email, change upon first
+                    login!
+                  </p>
+                  <input
+                    type="submit"
+                    value="Join Now"
+                    class="btn btn-primary btn-block mb-4"
+                  />
                 </form>
               </div>
 
@@ -221,21 +249,53 @@
 </template>
 
 <script>
+import Loader from "../../utils/vue-loader/loader.vue";
+
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
     return {
       ShowLogin: false,
-      ShowSignup: false
+      ShowSignup: false,
+      loading: false,
+      email: "",
+      password: ""
     };
   },
   methods: {
     Login() {
-        this.$router.push("/dashboard")
+      this.loading = true;
+      this.$store
+        .dispatch("LOGINUSER", {
+          email: this.email,
+          password: this.password
+        })
+        .then(res => {
+          window.console.log(res);
+          this.$toastr.s("Logged in Succesfully");
+          if (res.role == "admin") return this.$router.push("/Admin");
+          if (res.role == "cso") return this.$router.push("/Cso");
+          if (res.requiresChange == false)
+            return this.$router.push("/ChangePassword");
+          this.$router.push("/Dashboard");
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Login Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     Signup() {
-        this.$router.push("/admin")
+      this.$router.push("/admin");
+    }
+  },
+  mounted() {
+    if (this.$route.query.path == "cp") {
+      this.ShowLogin = true;
     }
   }
 };

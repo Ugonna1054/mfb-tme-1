@@ -1,8 +1,47 @@
 import { userService } from "../../../services/user.services";
+import { adminService } from "../../../services/AdminServices/admin.services";
 import { ApiService } from "../../../services/api.services";
 
 const actions = {
+  //Login Admin
   LOGIN: async ({ commit, dispatch }, { email, password }) => {
+    // eslint-disale-next-line prettier/prettier
+    return await adminService
+      .Login(email, password)
+      .then(async res => {
+        let token = res.token;
+        commit("SET_AUTH_TOKEN", res.token);
+        commit("SET_IS_AUTHENTICATED", true);
+        commit("SET_ROLE", res.role);
+        ApiService.setHeader(token);
+        let authorize = await dispatch("AUTHORISE", token);
+        return Promise.resolve({
+          role: res.role,
+          authorize,
+          requiresChange: res.requiresChange
+        });
+      })
+      .catch(err => {
+        window.console.log(err);
+        return Promise.reject(err);
+      });
+  },
+
+  AUTHORISE: async ({ commit }, token) => {
+    return await adminService
+      .Authorize(token)
+      .then(res => {
+        commit("SET_USER_DATA", res);
+        return true;
+      })
+      .catch(err => {
+        window.console.log(err);
+        return false;
+      });
+  },
+
+  //Login Admin
+  LOGINUSER: async ({ commit, dispatch }, { email, password }) => {
     // eslint-disale-next-line prettier/prettier
     return await userService
       .Login(email, password)
@@ -10,11 +49,9 @@ const actions = {
         let token = res.token;
         commit("SET_AUTH_TOKEN", res.token);
         commit("SET_IS_AUTHENTICATED", true);
-        commit("SET_IS_ADMIN", res.isAdmin);
         ApiService.setHeader(token);
         let authorize = await dispatch("AUTHORISE_USER", token);
         return Promise.resolve({
-          isAdmin: res.isAdmin,
           authorize,
           requiresChange: res.requiresChange
         });
@@ -29,7 +66,6 @@ const actions = {
     return await userService
       .Authorize(token)
       .then(res => {
-        window.console.log("user_data", res);
         commit("SET_USER_DATA", res);
         return true;
       })

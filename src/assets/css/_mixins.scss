@@ -10,3 +10,30 @@
     color: black;
     background: white;
 }
+
+//Logo
+@mixin Logo($height) {
+    .logo  {
+        position: absolute;
+        top: $height;
+        height: auto;
+        cursor: pointer;
+        .logo-image{
+            height:35px;
+        }
+        .logo_image_wrapper {
+            &::after {
+                content: "";
+                color: $main-color;
+                font-weight: 700;
+                font-size: large;
+            }
+        }
+    }
+}
+
+@mixin  line  {
+    border: 1.1px solid $main-color;
+    //background: $main-color;
+}
+

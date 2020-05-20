@@ -56,12 +56,12 @@
           <!-- Create User Tab start -->
           <b-tabs pills :active-nav-item-class="current" v-if="createUser">
             <!-- Agent Tab -->
-            <b-tab title-link-class title="Agent">
+            <b-tab :title-link-class="activ" title="Customer">
               <!-- <div class="line mb-3 mt-2"></div> -->
               <div class="mt-5">
                 <ValidationObserver v-slot="{ passes }">
                   <form @submit.prevent="passes(createAccount)">
-                    <div class="containe tab-con">
+                    <div class="containe">
                       <div class="row">
                         <div class="col-md-8">
                           <div class="row">
@@ -210,80 +210,46 @@
                                 </span>
                               </ValidationProvider>
                             </div>
-                            <!-- password -->
-                            <div class="form-group col-md-6 col-sm-12">
-                              <ValidationProvider
-                                name="password"
-                                rules="required|min:6"
-                                ref="password"
-                                v-slot="{ errors }"
-                              >
-                                <label for="password">Password</label>
-                                <input
-                                  v-model="password"
-                                  type="password"
-                                  name="password"
-                                  class="form-control"
-                                  id="password"
-                                />
-                                <span style="font-size:13px; color:red">
-                                  <span v-if="errors[0]">
-                                    <i class="fas fa-ban"></i>
-                                  </span>
-                                  {{ errors[0] }}
-                                </span>
-                              </ValidationProvider>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                              <ValidationProvider
-                                name="password confirmation"
-                                rules="required|confirmed:password"
-                                v-slot="{ errors }"
-                              >
-                                <label for="password">Confirm Password</label>
-                                <input
-                                  v-model="password1"
-                                  name="password confirmation"
-                                  type="password"
-                                  class="form-control"
-                                  id="password1"
-                                />
-                                <span style="font-size:13px; color:red">
-                                  <span v-if="errors[0]">
-                                    <i class="fas fa-ban"></i>
-                                  </span>
-                                  {{ errors[0] }}
-                                </span>
-                              </ValidationProvider>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                              <ValidationProvider
-                                name="role"
-                                rules="required"
-                                v-slot="{ errors }"
-                              >
-                                <label for="password">Designation</label>
-                                <select
-                                  name="role"
-                                  class="form-control"
-                                  v-model="role"
-                                  id
+                            <!-- Date of Birth -->
+                            <div class="col-md-6 mb-3">
+                              <ValidationProvider name="dob" rules>
+                                <label for>
+                                  Date of Birth
+                                  <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                  <datetime
+                                    v-model="dob"
+                                    class
+                                    placeholder=" -DD-MM-YY-"
+                                  ></datetime>
+                                  <div class="input-group-append">
+                                    <span
+                                      class="input-group-text"
+                                      style="height:30px"
+                                    >
+                                      <i
+                                        class="fa fa-calendar-check"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </span>
+                                  </div>
+                                </div>
+                                <span
+                                  v-if="error"
+                                  style="font-size:13px; color:red"
                                 >
-                                  <option value>--Select--</option>
-                                  <option value="cso"
-                                    >Customer Service Officer (CSO)</option
-                                  >
-                                  <option value="supervisor">Supervisor</option>
-                                </select>
-                                <span style="font-size:13px; color:red">
-                                  <span v-if="errors[0]">
+                                  <span>
                                     <i class="fas fa-ban"></i>
                                   </span>
-                                  {{ errors[0] }}
+                                  This field is required
                                 </span>
                               </ValidationProvider>
                             </div>
+                          </div>
 
+                          <div class="row">
+                            <!-- Gender -->
                             <div class="form-group col-md-6 col-sm-12">
                               <ValidationProvider
                                 name="role"
@@ -309,11 +275,9 @@
                                 </span>
                               </ValidationProvider>
                             </div>
-                          </div>
 
-                          <!-- Address -->
-                          <!-- <div class="row">
-                            <div class="col-12">
+                            <!-- Address -->
+                            <div class="col-md-6">
                               <div class="div1i mb-3">
                                 <ValidationProvider
                                   name="address"
@@ -343,7 +307,7 @@
                                 </ValidationProvider>
                               </div>
                             </div>
-                          </div>-->
+                          </div>
                           <!-- <div class="btn btn-info float-right">submit</div> -->
                         </div>
 
@@ -359,7 +323,7 @@
                                 </span>
                                 <div
                                   class="mb-2 mb-md-0 uploads"
-                                  style="height:130px"
+                                  style="height:auto"
                                 >
                                   <img class="img-fluid" :src="idCard_" alt />
                                 </div>
@@ -399,7 +363,7 @@
                                 </span>
                                 <div
                                   class="mb-2 mb-md-0 uploads"
-                                  style="height:130px"
+                                  style="height:auto"
                                 >
                                   <img
                                     class="img-fluid"
@@ -443,7 +407,7 @@
                           <b-button
                             type="submit"
                             class="btn mt-3 text-center mr-1 btn-primary"
-                            >Create Agent</b-button
+                            >Create Customer</b-button
                           >
                         </div>
                       </div>
@@ -463,69 +427,10 @@
             :active-nav-item-class="current"
             v-if="manageUser"
           >
-            <!-- Agent Tab -->
-            <b-tab title-link-class title="Agent">
-              <div class="line mb-3 mt-2"></div>
-              <div class>
-                <div class="mb-0">
-                  <div class="col-12">
-                    <div class="top mb-2">
-                      <div class="mb-3">CSO</div>
-                      <div>
-                        <div class="input-group float-right">
-                          <input
-                            type="search"
-                            placeholder="Search Agent"
-                            class="form-control"
-                          />
-                          <div class="input-group-append">
-                            <div class="input-group-text">
-                              <i class="fa fa-search"></i>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="table-responsive mt-3">
-                      <table>
-                        <tr style="color:#333" class>
-                          <th>Agent ID</th>
-                          <th>Agent Name</th>
-                          <th>Email</th>
-                          <th>Phone Number</th>
-                          <th>Wallet Balance</th>
-                          <!-- <th>Today Deposit</th> -->
-                          <th>Total Deposit</th>
-                          <th>Account Created</th>
-                          <!-- <th>Account Created Target</th> -->
-                          <th>Delete</th>
-                        </tr>
-
-                        <tr v-for="(agent, index) in 5" :key="index">
-                          <td>1234</td>
-                          <td>Agent Black</td>
-                          <td>agentb@yahoo.com</td>
-                          <td>08029299292</td>
-                          <td>&#8358; {{ formatAmount(50000) }}</td>
-                          <td>
-                            &#8358;
-                            {{ formatAmount(100000) }}
-                          </td>
-                          <td>3</td>
-                          <!-- <td>300</td> -->
-                          <td class="text-danger action">Delete</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </b-tab>
-
             <!-- Customer Tab -->
             <b-tab :title-link-class="active1" title="Customer">
-              <div class="line mb-3 mt-2"></div>
-              <div class="tab-c">
+              <div class="ml-n3">
+                <div class="line mb-3 mt-2"></div>
                 <div class="mb-0">
                   <div class="col-12">
                     <div class="top mb-2">
@@ -582,6 +487,37 @@
         </div>
       </div>
     </main>
+
+    <!-- success modal -->
+    <b-modal hide-header-close hide-footer v-model="success_modal" centered>
+      <div class="modal-container text-center">
+        <p class="welcome-text">Account Creation Successful</p>
+
+        <div>
+          <img
+            src="../../../assets/images/payment-success.png"
+            class="img-fluid"
+            width="100px"
+            alt
+          />
+        </div>
+
+        <p>Account Number : <strong>{{responseData.account}}</strong></p>
+
+        <div>
+          <button
+            class="btn btn-primary px-4 mt-4"
+            @click="
+              success_modal = false;
+              createUser = false;
+              manageUser = true;
+            "
+          >
+            Done
+          </button>
+        </div>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -601,6 +537,7 @@ export default {
   },
   data() {
     return {
+      success_modal: false,
       createUser: true,
       manageUser: false,
       loading: false,
@@ -610,13 +547,14 @@ export default {
       gender: "",
       email: "",
       phone: "",
-      password: "",
-      password1: "",
       idCard: {},
       idCard_: "",
       displayPicture: {},
       displayPicture_: "",
-      role: ""
+      role: "",
+      address: "",
+      dob: "",
+      responseData:{}
     };
   },
   computed: {
@@ -640,20 +578,22 @@ export default {
     createAccount() {
       this.loading = true;
       adminService
-        .createAdmin({
+        .createUser({
           firstname: this.firstname,
           lastname: this.lastname,
           middlename: this.middlename,
           gender: this.gender,
           email: this.email,
           phone: this.phone,
-          password: this.password,
+          dob: this.dob,
+          address: this.address,
           idCard: this.idCard,
           displayPicture: this.displayPicture,
           role: this.role
         })
-        .then(res => {
-          this.$toastr.s(res.message, "Successful");
+        .then((res) => {
+          this.success_modal = true;
+          this.responseData = res
         })
         .catch(err => {
           this.$toastr.e(err.message || err, "Failed!");

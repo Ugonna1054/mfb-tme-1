@@ -2,8 +2,8 @@ const mutations = {
   SET_USER_DATA(state, payload) {
     state.USER_DATA = payload;
   },
-  SET_IS_ADMIN(state, payload) {
-    state.IS_ADMIN = payload;
+  SET_ROLE(state, payload) {
+    state.ROLE = payload;
   },
   SET_IS_AUTHENTICATED(state, payload) {
     state.IS_AUTHENTICATED = payload;

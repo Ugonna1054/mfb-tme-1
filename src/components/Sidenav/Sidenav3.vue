@@ -12,16 +12,12 @@
         </div>
         <div class="sidebar-headers mt-5">
           <div class="user-pic">
-            <img
-              class="img-fluid"
-              src="../../assets/images/avatar.jpg"
-              alt="User picture"
-            />
+            <img class="img-fluid" src="../../assets/images/avatar.jpg" alt="User picture" />
           </div>
           <div class="user-info">
             <span class="user-name">
               Hi!
-              <strong>{{user.firstname}}</strong>
+              <strong>CSO</strong>
             </span>
           </div>
         </div>
@@ -34,51 +30,22 @@
               <span>Overview</span>
             </label>
             <li :class="{ active: isHome }" @click="home">
-              <router-link to="/dashboard">
+              <router-link to="/cso">
                 <i class="icons fa fa-home"></i>
-                <span class="event">Home</span>
+                <span class="event">Dashboard</span>
               </router-link>
             </li>
             <li :class="{ active: isAccount }" @click="account">
-              <router-link to="/account">
-                <i class="icons fal fa-user"></i>
-                <span class="event">Accounts</span>
+              <router-link to="/cso/user">
+                <i class="icons fa fa-user"></i>
+                <span class="event">User Management</span>
               </router-link>
             </li>
-            <li :class="{ active: isTransfer }" @click="transfer">
-              <router-link to="transfer">
-                <i class="icons fa fa-paper-plane-o"></i>
-                <span class="event">Transfer</span>
-              </router-link>
-            </li>
-            <li :class="{ active: isFund }" @click="fund">
-              <router-link to="fund">
-                <i class="icons fa fa-chart-line"></i>
-                <span class="event">Fund Account</span>
-              </router-link>
-            </li>
-            <li :class="{ active: isUtility }" @click="utility">
-              <router-link to="utility">
-                <i class="icons fal fa-tv"></i>
-                <span class="event">Utility</span>
-              </router-link>
-            </li>
-            <li :class="{ active: isLoan }" @click="loan">
-              <router-link to="loan">
-                <i class="icons fal fa-credit-card"></i>
-                <span class="event">Loan</span>
-              </router-link>
-            </li>
-            <li :class="{ active: isInvestment }" @click="invest">
-              <router-link to="investment">
-                <i class="icons fas fa-receipt"></i>
-                <span class="event">Investment</span>
-              </router-link>
-            </li>
+
             <li>
-              <router-link to="/">
+              <router-link to="#">
                 <i class="icons fa fa-sign-out-alt"></i>
-                <span class="event">Logout </span>
+                <span class="event">Logout</span>
               </router-link>
             </li>
           </ul>
@@ -114,14 +81,15 @@ export default {
   },
   computed: {
     ...mapState({
-      user:state => state.User.USER_DATA,
       isHome: state => state.Misc.isHome,
       isAccount: state => state.Misc.isAccount,
-      isTransfer: state => state.Misc.isTransfer,
-      isFund: state => state.Misc.isFund,
-      isUtility: state => state.Misc.isUtility,
-      isLoan: state => state.Misc.isLoan,
-      isInvestment: state => state.Misc.isInvestment
+    //   isTransfer: state => state.Misc.isTransfer,
+    //   isFund: state => state.Misc.isFund,
+    //   isUtility: state => state.Misc.isUtility,
+    //   isLoan: state => state.Misc.isLoan,
+    //   isInvestment: state => state.Misc.isInvestment,
+    //   isMisc1: state => state.Misc.isMisc1,
+    //   isMisc2: state => state.Misc.isMisc2
     })
   },
   methods: {
@@ -131,21 +99,27 @@ export default {
     account() {
       this.$store.dispatch("account");
     },
-    transfer() {
-      this.$store.dispatch("transfer");
-    },
-    fund() {
-      this.$store.dispatch("fund");
-    },
-    utility() {
-      this.$store.dispatch("utility");
-    },
-    loan() {
-      this.$store.dispatch("loan");
-    },
-    invest() {
-      this.$store.dispatch("investment");
-    }
+    // transfer() {
+    //   this.$store.dispatch("transfer");
+    // },
+    // fund() {
+    //   this.$store.dispatch("fund");
+    // },
+    // utility() {
+    //   this.$store.dispatch("utility");
+    // },
+    // loan() {
+    //   this.$store.dispatch("loan");
+    // },
+    // invest() {
+    //   this.$store.dispatch("investment");
+    // },
+    // misc1() {
+    //   this.$store.dispatch("misc1");
+    // },
+    // misc2() {
+    //   this.$store.dispatch("misc2");
+    // }
   },
   mounted() {
     $(".sidebar-dropdown > a").click(function() {
@@ -183,6 +157,13 @@ export default {
 <style lang="scss" scoped>
 /* sidenav icon text */
 .event {
+  font: Regular 24px/31px "Source Sans Pro" !important;
+  color: #020100 !important;
+  opacity: 0.8;
+  font-family: "SourceSansPro-Regular";
+}
+
+.event1 {
   font: Regular 24px/31px "Source Sans Pro" !important;
   color: #020100 !important;
   opacity: 0.8;
@@ -256,12 +237,43 @@ export default {
 
 /* active nav item  */
 .active {
+  li {
+    color: white !important;
+  }
   background: $main-color !important;
   .event {
     color: white !important;
   }
   i {
     color: $main-color !important;
+  }
+}
+
+.active1 {
+  li {
+    color: white !important;
+  }
+  background: $main-color !important;
+  .event1 {
+    color: white !important;
+  }
+  i {
+    color: $main-color !important;
+  }
+}
+
+.sidebar-dropdown {
+  cursor: pointer;
+}
+
+.sidebar-submenu {
+  background: white !important;
+}
+
+.sidebar-submenu li:hover {
+  background: $main-color !important;
+  .event1 {
+    color: #fff !important;
   }
 }
 </style>

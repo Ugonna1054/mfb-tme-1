@@ -4,12 +4,31 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-   //Home route
-   {
+  //Home route
+  {
     path: "/",
     name: "Home",
     component: () => import("../views/Home/Home.vue")
   },
+  //Change password
+  {
+    path: "/ChangePassword",
+    name: "ChangePassword",
+    component: () => import("../views/Security/ChangePassword/ChangePassword.vue")
+  },
+  //Send password reset email
+  {
+    path: "/ResetEmail",
+    name: "ResetEmail",
+    component: () => import("../views/Security/ForgotPassword/email.vue")
+  },
+  //Reset password
+  {
+    path: "/ResetPassword",
+    name: "ResetPassword",
+    component: () => import("../views/Security/ForgotPassword/ResetPassword.vue")
+  },
+  //User/Customer Routes
   {
     path: "/dashboard",
     name: "Brain",
@@ -119,6 +138,11 @@ const routes = [
   },
   //Admin Routes
   {
+    path: "/admin/login",
+    name: "admin/login",
+    component: () => import("../views/Admin/Login/Login.vue")
+  },
+  {
     path: "/Admin",
     name: "Admin",
     component: () => import("../views/Admin/Brain/Brain.vue"),
@@ -164,7 +188,27 @@ const routes = [
         component: () => import("../views/Admin/Reports/TrialBalance.vue")
       }
     ]
-  }
+  },
+
+  //Cso/Supervisor Routes
+  {
+    path: "/Cso",
+    name: "Cso",
+    component: () => import("../views/Cso/Brain/Brain.vue"),
+    children: [
+      {
+        path: "/",
+        name: "Dashboard",
+        component: () => import("../views/Cso/Dashboard/Dashboard.vue")
+      },
+      {
+        path: "/Cso/User",
+        name: "User",
+        component: () => import("../views/Cso/User/User.vue")
+      },
+    ]
+  },
+
 ];
 
 const router = new VueRouter({

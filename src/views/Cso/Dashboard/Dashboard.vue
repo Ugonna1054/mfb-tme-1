@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <Loader :loading="loading" loading-text="please wait..." />
     <main class="page-content">
       <div class="dashboard">
         <!-- header -->
@@ -12,19 +13,22 @@
         <div class="middle-container">
           <div class="box">
             <p class="top transaction-title">Total Customers</p>
-            <p class="middle">&#8358;120,000</p>
+            <p class="middle">
+              <span v-if="Customers.length < 10">0</span>{{ Customers.length }}
+            </p>
             <div class="card-icon">
-              <img
+              <i class="fal fa-user fa-2x mt-1 user-icon"></i>
+              <!-- <img
                 src="../../../assets/images/loan.svg"
                 class="img-fluid box-img"
                 alt="loan-icon"
                 width="30px"
-              />
+              /> -->
             </div>
           </div>
           <div class="box">
             <p class="top transaction-title">Total Deposit</p>
-            <p class="middle">&#8358;170,000</p>
+            <p class="middle">&#8358;0</p>
             <div class="card-icon">
               <img
                 src="../../../assets/images/invest.svg"
@@ -36,7 +40,7 @@
           </div>
           <div class="box">
             <p class="top transaction-title">Total Investment</p>
-            <p class="middle">&#8358;170,000</p>
+            <p class="middle">&#8358;0</p>
             <div class="card-icon">
               <img
                 src="../../../assets/images/invest.svg"
@@ -55,24 +59,27 @@
               <div class="recent-transactions table-responsive">
                 <table>
                   <tr>
-                    <th>Status</th>
+                    <th>S/N</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Account</th>
                     <th>Phone</th>
-                    <th>Address</th>
+                    <th>Account</th>
+                    <th>Status</th>
                     <th>Date</th>
                     <!-- <th>Performance Bar</th> -->
                   </tr>
 
-                  <tr v-for="(transaction, index) in 10" :key="index">
-                    <td>123456</td>
-                    <td>0000000223</td>
-                    <td>Savings</td>
-                    <td>Agent Black</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                    <td>09/09/2020</td>
+                  <tr
+                    v-for="(customer, index) in lastTenCustomers"
+                    :key="index"
+                  >
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ customer.firstname }} {{ customer.lastname }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.account.accounts[0].number }}</td>
+                    <td>{{ customer.status }}</td>
+                    <td>{{ customer.createdAt }}</td>
                   </tr>
                 </table>
               </div>
@@ -94,9 +101,50 @@
 </template>
 
 <script>
+import Loader from "../../../utils/vue-loader/loader.vue";
+import { adminService } from "../../../services/AdminServices/admin.services";
+
 export default {
   name: "dashboard",
+  components: {
+    Loader
+  },
+  data() {
+    return {
+      loading: false,
+      Customers: []
+    };
+  },
+  computed: {
+    //Get the most recently created customers
+    lastTenCustomers() {
+      let customers = this.Customers;
+
+      if (customers.length >= 10) {
+        customers = customers.slice(customers.length - 10);
+
+        return customers.reverse();
+      }
+
+      return customers.reverse();
+    }
+  },
   methods: {
+    //Get all users/customers
+    getUsers() {
+      this.loading = true;
+      adminService
+        .getUsers()
+        .then(res => {
+          this.Customers = res;
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
     transfer() {
       this.$store.dispatch("transfer");
     },
@@ -112,11 +160,12 @@ export default {
   },
   mounted() {
     this.$store.dispatch("home");
+    this.getUsers();
   }
 };
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .box-2 {
   padding: 24px 20px !important;
 }
@@ -128,7 +177,7 @@ export default {
   padding: 25px 20px !important;
 }
 .box {
-  cursor: pointer;
+  cursor:copy;
 }
 .link {
   text-decoration: none;
@@ -136,5 +185,9 @@ export default {
 .middle-container {
   font-family: $SourceSansPro-Light;
   margin-right: 40px;
+}
+.user-icon {
+  color: $main-color;
+  font-size: 25px;
 }
 </style>

@@ -40,7 +40,7 @@ const actions = {
       });
   },
 
-  //Login Admin
+  //Login User/Customer
   LOGINUSER: async ({ commit, dispatch }, { email, password }) => {
     // eslint-disale-next-line prettier/prettier
     return await userService
@@ -73,6 +73,14 @@ const actions = {
         window.console.log(err);
         return false;
       });
+  },
+
+  LOGOUT({ commit }) {
+    commit("SET_AUTH_TOKEN", "");
+    commit("SET_IS_AUTHENTICATED", "");
+    commit("SET_ROLE", "");
+    commit("SET_USER_DATA", {});
+    commit("SET_USER_DETAILS", {});
   }
 };
 

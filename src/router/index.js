@@ -14,7 +14,8 @@ const routes = [
   {
     path: "/ChangePassword",
     name: "ChangePassword",
-    component: () => import("../views/Security/ChangePassword/ChangePassword.vue")
+    component: () =>
+      import("../views/Security/ChangePassword/ChangePassword.vue")
   },
   //Send password reset email
   {
@@ -26,7 +27,8 @@ const routes = [
   {
     path: "/ResetPassword",
     name: "ResetPassword",
-    component: () => import("../views/Security/ForgotPassword/ResetPassword.vue")
+    component: () =>
+      import("../views/Security/ForgotPassword/ResetPassword.vue")
   },
   //User/Customer Routes
   {
@@ -205,10 +207,9 @@ const routes = [
         path: "/Cso/User",
         name: "User",
         component: () => import("../views/Cso/User/User.vue")
-      },
+      }
     ]
-  },
-
+  }
 ];
 
 const router = new VueRouter({

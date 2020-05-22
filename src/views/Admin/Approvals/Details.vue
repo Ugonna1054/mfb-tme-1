@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <Loader :loading="loading" loading-text="please wait..." />
     <main class="page-content">
       <div class="dashboard">
         <!-- header -->
@@ -33,31 +34,40 @@
                         <tr class="row">
                           <td class="col-6 col-md-2">Name</td>
                           <td class="col-6 col-md-4">
-                            John Doe
+                            {{ USER_DETAILS.firstname }}
+                            {{ USER_DETAILS.lastname }}
                           </td>
                           <td class="col-6 col-md-2">Email Address</td>
-                          <td class="col-6 col-md-4">johndoe@yahoo.com</td>
+                          <td class="col-6 col-md-4">
+                            {{ USER_DETAILS.firstname }}
+                          </td>
                         </tr>
                         <tr class="row">
                           <td class="col-md-2 col-6">Phone Number</td>
-                          <td class="col-md-4 col-6">0908181881818</td>
+                          <td class="col-md-4 col-6">
+                            {{ USER_DETAILS.phone }}
+                          </td>
                           <td class="col-md-2 col-6">Account Number</td>
                           <td class="col-md-4 col-6">
-                            002020202020
+                            {{ USER_DETAILS.account.accounts[0].number }}
                           </td>
                         </tr>
                         <tr class="row">
                           <td class="col-md-2 col-6">Gender</td>
-                          <td class="col-md-4 col-6">Male</td>
+                          <td class="col-md-4 col-6">
+                            {{ USER_DETAILS.gender }}
+                          </td>
                           <td class="col-md-2 col-6">Home Address</td>
-                          <td class="col-md-4 col-6">1, amechi street</td>
+                          <td class="col-md-4 col-6">
+                            {{ USER_DETAILS.address }}
+                          </td>
                         </tr>
                         <tr class="row">
                           <td class="col-md-2 col-6">Date of Birth</td>
-                          <td class="col-md-4 col-6">09/06/1999</td>
+                          <td class="col-md-4 col-6">{{ USER_DETAILS.dob }}</td>
                           <td class="col-md-2 col-6">Date Applied</td>
                           <td class="col-md-4 col-6">
-                            09/09/2000
+                            {{ USER_DETAILS.createdAt }}
                           </td>
                         </tr>
                       </table>
@@ -312,22 +322,23 @@
 </template>
 
 <script>
-//import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { mapState } from "vuex";
+import { adminService } from "../../../services/AdminServices/admin.services";
+import Loader from "../../../utils/vue-loader/loader.vue";
 
 export default {
   name: "Details",
   components: {
-    //ValidationObserver,
-    //ValidationProvider
+    Loader
   },
   data() {
     return {
       createUser: true,
       manageUser: false,
       loading: false,
-      Customers: [],
-      Transactions: [],
-      Loans: [],
+      Customers: null,
+      Transactions: null,
+      Loans: null,
       account: true,
       loan: false,
       transaction: false,
@@ -343,7 +354,10 @@ export default {
     },
     routeQuery() {
       return this.$route.query.p;
-    }
+    },
+    ...mapState({
+      USER_DETAILS: state => state.User.USER_DETAILS
+    })
   },
   methods: {
     transfer() {
@@ -355,28 +369,36 @@ export default {
     formatAmount(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //this function automatically adds commas to the value where necessary
     },
-    createAccount() {},
-    Account() {
-      //let customer = this.Customers[index];
-      //this.$store.commit("SET_USER_DETAILS", customer);
-      this.$router.push("/Admin/Approvals/Details");
+    updateApprove() {
+      this.loading = true;
+      adminService
+        .updateApprove({ id: this.USER_DETAILS._id })
+        .then(res => {
+          this.$toastr.s(res.message, "Successful!");
+          this.$router.push("/admin/approvals")
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
-    Transaction() {
-      // let transaction = this.Transactions[index];
-      // this.$store.commit("SET_TRANSACTION_DETAILS", transaction);
-      this.$router.push("/Admin/Approvals/Details?p=1");
+    updateDecline() {
+      this.loading = true;
+      adminService
+        .updateDecline({ id: this.USER_DETAILS._id })
+        .then(res => {
+          this.$toastr.s(res.message, "Successful!");
+          this.$router.push("/admin/approvals")
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
-    Loan() {
-      //let loan = this.Loans[index];
-      //this.$store.commit("SET_LOAN_DETAILS", loan);
-      this.$router.push("/Admin/Approvals/Details?p=2");
-    },
-    Investment() {
-      this.$router.push("/Admin/Approvals/Details?p=3");
-    },
-
-    updateApprove() {},
-    updateDecline() {},
     updateApproveT() {},
     updateDeclineT() {},
     updateApproveL() {},

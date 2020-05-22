@@ -37,6 +37,6 @@ export default {
 <style lang="scss">
 @import url("./assets/fontawesome/css/all.css");
 #app {
-  background: whitesmoke;
+  background:black;
 }
 </style>

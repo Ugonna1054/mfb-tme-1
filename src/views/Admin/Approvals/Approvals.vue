@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <Loader :loading="loading" loading-text="please wait..." />
     <main class="page-content">
       <div class="dashboard">
         <!-- header -->
@@ -52,13 +53,13 @@
                           <th>Details</th>
                         </tr>
 
-                        <tr v-for="(customer, index) in 7" :key="index">
+                        <tr v-for="(customer, index) in Customers" :key="index">
                           <td>
-                            John Doe
+                            {{customer.firstname}}  {{customer.lastname}}
                           </td>
-                          <td>0901119191919</td>
-                          <td>jd@yahoo.com</td>
-                          <td>Pending</td>
+                          <td>{{customer.phone}} </td>
+                          <td> {{customer.email}} </td>
+                          <td> {{customer.status}} </td>
                           <td
                             class="text-primary action"
                             @click="Account(index)"
@@ -270,13 +271,13 @@
 </template>
 
 <script>
-//import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { adminService } from "../../../services/AdminServices/admin.services";
+import Loader from "../../../utils/vue-loader/loader.vue";
 
 export default {
   name: "Approvals",
   components: {
-    //ValidationObserver,
-    //ValidationProvider
+    Loader
   },
   data() {
     return {
@@ -304,7 +305,22 @@ export default {
     formatAmount(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //this function automatically adds commas to the value where necessary
     },
-    createAccount() {},
+    getUsers() {
+      adminService
+        .getUsers()
+        .then(res => {
+          this.Customers = res;
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    createAccount() {
+      
+    },
     Account(index) {
       let customer = this.Customers[index];
       this.$store.commit("SET_USER_DETAILS", customer);
@@ -325,6 +341,7 @@ export default {
     }
   },
   mounted() {
+    this.getUsers();
     if (this.routeQuery == 1) return (this.transaction = true);
     if (this.routeQuery == 2) return (this.loan = true);
     if (this.routeQuery == 3) return (this.investment = true);

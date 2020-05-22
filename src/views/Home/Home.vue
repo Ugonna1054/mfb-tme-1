@@ -275,11 +275,12 @@ export default {
         })
         .then(res => {
           window.console.log(res);
-          this.$toastr.s("Logged in Succesfully");
-          if (res.role == "admin") return this.$router.push("/Admin");
-          if (res.role == "cso") return this.$router.push("/Cso");
-          if (res.requiresChange == false)
+          
+          if (res.requiresChange == false) {
+            this.$toastr.s("Please Change your password");
             return this.$router.push("/ChangePassword");
+          }
+          this.$toastr.s("Logged in Succesfully");
           this.$router.push("/Dashboard");
         })
         .catch(err => {

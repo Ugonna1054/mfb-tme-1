@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+     <Loader :loading="loading" loading-text="please wait..." />
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
       <i class="fas fa-bars"></i>
     </a>
@@ -42,7 +43,7 @@
               </router-link>
             </li>
 
-            <li>
+            <li @click="Logout"> 
               <router-link to="#">
                 <i class="icons fa fa-sign-out-alt"></i>
                 <span class="event">Logout</span>
@@ -72,12 +73,17 @@
 <script>
 import $ from "jquery";
 import { mapState } from "vuex";
+import Loader from "../../utils/vue-loader/loader.vue";
 
 export default {
   name: "Sidenav",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
-    return {};
+    return {
+      loading:false
+    };
   },
   computed: {
     ...mapState({
@@ -86,10 +92,6 @@ export default {
     //   isTransfer: state => state.Misc.isTransfer,
     //   isFund: state => state.Misc.isFund,
     //   isUtility: state => state.Misc.isUtility,
-    //   isLoan: state => state.Misc.isLoan,
-    //   isInvestment: state => state.Misc.isInvestment,
-    //   isMisc1: state => state.Misc.isMisc1,
-    //   isMisc2: state => state.Misc.isMisc2
     })
   },
   methods: {
@@ -99,6 +101,14 @@ export default {
     account() {
       this.$store.dispatch("account");
     },
+     Logout() {
+      this.loading = true
+      this.$store
+        .dispatch("LOGOUT")
+        .then(() => this.$router.push("/admin/login"))
+        .catch(() => this.$toastr.e("Failed"))
+        .finally(() => this.loading = false)
+    }
     // transfer() {
     //   this.$store.dispatch("transfer");
     // },
@@ -108,18 +118,6 @@ export default {
     // utility() {
     //   this.$store.dispatch("utility");
     // },
-    // loan() {
-    //   this.$store.dispatch("loan");
-    // },
-    // invest() {
-    //   this.$store.dispatch("investment");
-    // },
-    // misc1() {
-    //   this.$store.dispatch("misc1");
-    // },
-    // misc2() {
-    //   this.$store.dispatch("misc2");
-    // }
   },
   mounted() {
     $(".sidebar-dropdown > a").click(function() {

@@ -453,6 +453,7 @@
                     <div class="recent-transactions table-responsive">
                       <table>
                         <tr style="color:#333" class>
+                          <th>S/N</th>
                           <th>Name</th>
                           <th>Email Address</th>
                           <th>Phone Number</th>
@@ -460,21 +461,26 @@
                           <th>Home Address</th>
                           <th>DOB</th>
                           <th>Account Balance</th>
-                          <th>Delete</th>
+                          <th>Status</th>
                         </tr>
 
-                        <tr v-for="(customer, index) in 5" :key="index">
-                          <td>John doe</td>
-                          <td>jd@yahoo.com</td>
-                          <td>09012345678</td>
-                          <td>00002929292</td>
-                          <td>1, amechi street</td>
-                          <td>03/04/2020</td>
+                        <tr v-for="(customer, index) in Customers" :key="index">
+                           <td>{{ index + 1 }}</td>
                           <td>
-                            &#8358;
-                            {{ formatAmount(100000) }}
+                            {{ customer.firstname }} {{ customer.lastname }}
                           </td>
-                          <td class="text-danger action">Delete</td>
+                          <td>{{ customer.email }}</td>
+                          <td>{{ customer.phone }}</td>
+                          <td >{{ customer.account.accounts[0].number }}</td>
+                          <td>{{ customer.address }}</td>
+                          <td>{{ customer.dob }}</td>
+                          <td class="text-center">
+                            &#8358;
+                            {{
+                              formatAmount(customer.account.accounts[0].balance)
+                            }}
+                          </td>
+                          <td class="text-info action">{{customer.status}}</td>
                         </tr>
                       </table>
                     </div>
@@ -538,6 +544,7 @@ export default {
   data() {
     return {
       success_modal: false,
+      Customers: [],
       createUser: true,
       manageUser: false,
       loading: false,
@@ -560,7 +567,7 @@ export default {
   computed: {
     current() {
       return "current";
-    }
+    },
   },
   methods: {
     transfer() {
@@ -575,6 +582,21 @@ export default {
     formatAmount(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //this function automatically adds commas to the value where necessary
     },
+    //get all customers
+    getUsers() {
+      adminService
+        .getUsers()
+        .then(res => {
+          this.Customers = res;
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    //Create new customer
     createAccount() {
       this.loading = true;
       adminService
@@ -608,6 +630,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("home");
+    this.getUsers();
   }
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Loader :loading="loading" loading-text="please wait..." />
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
       <i class="fas fa-bars"></i>
     </a>
@@ -55,21 +56,29 @@
               <div class="sidebar-submenu">
                 <ul>
                   <li :class="{ active1: isLoan }" @click="loan">
-                    <router-link to="/admin/reports/balancesheet"><span class="event1">Balance Sheet</span> </router-link>
+                    <router-link to="/admin/reports/balancesheet">
+                      <span class="event1">Balance Sheet</span>
+                    </router-link>
                   </li>
                   <li :class="{ active1: isInvestment }" @click="invest">
-                    <router-link to="/admin/reports/statement"> <span class="event1">Income Statement (P&L)</span> </router-link>
+                    <router-link to="/admin/reports/statement">
+                      <span class="event1">Income Statement (P&L)</span>
+                    </router-link>
                   </li>
                   <li :class="{ active1: isUtility }" @click="utility">
-                    <router-link to="/admin/reports/ledger"><span class="event1">General Ledger</span></router-link>
+                    <router-link to="/admin/reports/ledger">
+                      <span class="event1">General Ledger</span>
+                    </router-link>
                   </li>
                   <li :class="{ active1: isMisc1 }" @click="misc1">
-                    <router-link to="/admin/reports/trialbalance"> <span class="event1">Trial Balance</span> </router-link>
+                    <router-link to="/admin/reports/trialbalance">
+                      <span class="event1">Trial Balance</span>
+                    </router-link>
                   </li>
                 </ul>
               </div>
             </li>
-            <li>
+            <li @click="Logout">
               <router-link to="#">
                 <i class="icons fa fa-sign-out-alt"></i>
                 <span class="event">Logout</span>
@@ -99,12 +108,17 @@
 <script>
 import $ from "jquery";
 import { mapState } from "vuex";
+import Loader from "../../utils/vue-loader/loader.vue";
 
 export default {
   name: "Sidenav",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
-    return {};
+    return {
+      loading: false
+    };
   },
   computed: {
     ...mapState({
@@ -146,6 +160,14 @@ export default {
     },
     misc2() {
       this.$store.dispatch("misc2");
+    },
+    Logout() {
+      this.loading = true;
+      this.$store
+        .dispatch("LOGOUT")
+        .then(() => this.$router.push("/admin/login"))
+        .catch(() => this.$toastr.e("Failed"))
+        .finally(() => (this.loading = false));
     }
   },
   mounted() {
@@ -264,8 +286,8 @@ export default {
 
 /* active nav item  */
 .active {
-  li{
-    color: white  !important;
+  li {
+    color: white !important;
   }
   background: $main-color !important;
   .event {
@@ -277,8 +299,8 @@ export default {
 }
 
 .active1 {
-  li{
-    color: white  !important;
+  li {
+    color: white !important;
   }
   background: $main-color !important;
   .event1 {
@@ -297,11 +319,10 @@ export default {
   background: white !important;
 }
 
-.sidebar-submenu li:hover{
-  background:$main-color !important;
+.sidebar-submenu li:hover {
+  background: $main-color !important;
   .event1 {
     color: #fff !important;
   }
- }
-
+}
 </style>

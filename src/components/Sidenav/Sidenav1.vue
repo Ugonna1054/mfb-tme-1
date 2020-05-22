@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Loader :loading="loading" loading-text="please wait..." />
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
       <i class="fas fa-bars"></i>
     </a>
@@ -13,6 +14,13 @@
         <div class="sidebar-headers mt-5">
           <div class="user-pic">
             <img
+              v-if="user.displayPicture"
+              class="img-fluid"
+              :src="user.displayPicture"
+              alt="User picture"
+            />
+            <img
+              v-else
               class="img-fluid"
               src="../../assets/images/avatar.jpg"
               alt="User picture"
@@ -21,7 +29,7 @@
           <div class="user-info">
             <span class="user-name">
               Hi!
-              <strong>{{user.firstname}}</strong>
+              <strong>{{ user.firstname }}</strong>
             </span>
           </div>
         </div>
@@ -75,7 +83,7 @@
                 <span class="event">Investment</span>
               </router-link>
             </li>
-            <li>
+            <li @click="Logout">
               <router-link to="/">
                 <i class="icons fa fa-sign-out-alt"></i>
                 <span class="event">Logout </span>
@@ -105,16 +113,21 @@
 <script>
 import $ from "jquery";
 import { mapState } from "vuex";
+import Loader from "../../utils/vue-loader/loader.vue";
 
 export default {
   name: "Sidenav",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
-    return {};
+    return {
+      loading : false
+    };
   },
   computed: {
     ...mapState({
-      user:state => state.User.USER_DATA,
+      user: state => state.User.USER_DATA,
       isHome: state => state.Misc.isHome,
       isAccount: state => state.Misc.isAccount,
       isTransfer: state => state.Misc.isTransfer,
@@ -145,6 +158,14 @@ export default {
     },
     invest() {
       this.$store.dispatch("investment");
+    },
+    Logout() {
+      this.loading = true
+      this.$store
+        .dispatch("LOGOUT")
+        .then(() => this.$router.push("/?path=cp"))
+        .catch(() => this.$toastr.e("Failed"))
+        .finally(() => this.loading = false)
     }
   },
   mounted() {

@@ -464,13 +464,13 @@
             v-if="manageUser"
           >
             <!-- Agent Tab -->
-            <b-tab title-link-class title="Agent">
+            <b-tab title-link-class title="Admin">
               <div class="line mb-3 mt-2"></div>
               <div class>
                 <div class="mb-0">
                   <div class="col-12">
                     <div class="top mb-2">
-                      <div class="mb-3">CSO</div>
+                      <div class="mb-3">Admin</div>
                       <div>
                         <div class="input-group float-right">
                           <input
@@ -489,29 +489,25 @@
                     <div class="table-responsive mt-3">
                       <table>
                         <tr style="color:#333" class>
-                          <th>Agent ID</th>
-                          <th>Agent Name</th>
+                          <th>ID</th>
+                          <th>Name</th>
                           <th>Email</th>
                           <th>Phone Number</th>
-                          <th>Wallet Balance</th>
-                          <!-- <th>Today Deposit</th> -->
-                          <th>Total Deposit</th>
+                          <th>Designation</th>
                           <th>Account Created</th>
                           <!-- <th>Account Created Target</th> -->
                           <th>Delete</th>
                         </tr>
 
-                        <tr v-for="(agent, index) in 5" :key="index">
-                          <td>1234</td>
-                          <td>Agent Black</td>
-                          <td>agentb@yahoo.com</td>
-                          <td>08029299292</td>
-                          <td>&#8358; {{ formatAmount(50000) }}</td>
+                        <tr v-for="(admin, index) in Admins" :key="index">
+                          <td>{{ index + 1 }}</td>
+                          <td>{{ admin.firstname }} {{ admin.lastname }}</td>
+                          <td>{{ admin.email }}</td>
+                          <td>{{ admin.phone }}</td>
                           <td>
-                            &#8358;
-                            {{ formatAmount(100000) }}
+                            {{ admin.role.toUpperCase() }}
                           </td>
-                          <td>3</td>
+                          <td>0</td>
                           <!-- <td>300</td> -->
                           <td class="text-danger action">Delete</td>
                         </tr>
@@ -558,16 +554,20 @@
                           <th>Delete</th>
                         </tr>
 
-                        <tr v-for="(customer, index) in 5" :key="index">
-                          <td>John doe</td>
-                          <td>jd@yahoo.com</td>
-                          <td>09012345678</td>
-                          <td>00002929292</td>
-                          <td>1, amechi street</td>
-                          <td>03/04/2020</td>
+                        <tr v-for="(customer, index) in Customers" :key="index">
+                          <td>
+                            {{ customer.firstname }} {{ customer.lastname }}
+                          </td>
+                          <td>{{ customer.email }}</td>
+                          <td>{{ customer.phone }}</td>
+                          <td>{{ customer.account.accounts[0].balance }}</td>
+                          <td>{{ customer.address }}</td>
+                          <td>{{ customer.dob }}</td>
                           <td>
                             &#8358;
-                            {{ formatAmount(100000) }}
+                            {{
+                              formatAmount(customer.account.accounts[0].balance)
+                            }}
                           </td>
                           <td class="text-danger action">Delete</td>
                         </tr>
@@ -616,7 +616,9 @@ export default {
       idCard_: "",
       displayPicture: {},
       displayPicture_: "",
-      role: ""
+      role: "",
+      Admins: [],
+      Customers: []
     };
   },
   computed: {
@@ -662,12 +664,40 @@ export default {
           this.loading = false;
         });
     },
+    getAdmins() {
+      adminService
+        .getAdmins()
+        .then(res => {
+          this.Admins = res;
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    getUsers() {
+      adminService
+        .getUsers()
+        .then(res => {
+          this.Customers = res;
+        })
+        .catch(err => {
+          this.$toastr.e(err.message || err, "Failed!");
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
     onSizeExceeded() {
       return;
     }
   },
   mounted() {
     this.$store.dispatch("home");
+    this.getAdmins();
+    this.getUsers();
   }
 };
 </script>

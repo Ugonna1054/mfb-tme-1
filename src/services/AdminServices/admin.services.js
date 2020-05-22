@@ -18,7 +18,7 @@ const adminService = {
     });
   },
 
-  //Get Current User Details
+  //Get Current Admin Details
   Authorize: async () => {
     return await ApiService.get("/admin/me")
       .then(res => {
@@ -102,10 +102,10 @@ const adminService = {
     });
   },
 
-  //Get all Agents
-  getAgents: () => {
+  //Get all Back-office staffs
+  getAdmins: () => {
     return new Promise(function (resolve, reject) {
-      ApiService.get("/users/agent")
+      ApiService.get("/admin")
         .then(({ data }) => {
           resolve(data);
         })
@@ -115,10 +115,10 @@ const adminService = {
     });
   },
 
-  //Get all Transactions
-  getTransactions: () => {
+  //Get all Back-office staffs
+  getUsers: () => {
     return new Promise(function (resolve, reject) {
-      ApiService.get("/transactions")
+      ApiService.get("/users")
         .then(({ data }) => {
           resolve(data);
         })
@@ -127,6 +127,7 @@ const adminService = {
         });
     });
   },
+
 
   //Update User status to Approved
   updateApprove: ({ id }) => {

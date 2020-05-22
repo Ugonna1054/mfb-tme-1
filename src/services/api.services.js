@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//https://matrixx-server.herokuapp.com/api
-//http://localhost:4000/api
+//https://tme-server.herokuapp.com/api
+//http://localhost:5000/api
 
 const baseUrl = "http://localhost:5000/api";
 axios.defaults.baseURL = baseUrl;

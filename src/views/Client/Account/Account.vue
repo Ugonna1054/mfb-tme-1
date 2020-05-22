@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <Loader :loading="loading" loading-text="please wait..." />
     <main class="page-content">
       <header class="welcome-text mb-3 ml-2 ml-lg-0">Account Summary</header>
 
@@ -8,7 +9,7 @@
           <div class="col-md-10">
             <!-- Table  start -->
             <div class="table-responsive">
-              <div class="transaction-title mt-3">Account Balance</div>
+              <div class="transaction-title mt-3 mb-2">Account Details</div>
               <table>
                 <tr class="th-1">
                   <th>Account</th>
@@ -18,12 +19,12 @@
                   <th>Last Transaction</th>
                 </tr>
 
-                <tr v-for="one in 3" :key="one">
-                  <td>01010101010</td>
-                  <td>John Doe</td>
-                  <td>Savings Account</td>
-                  <td>&#8358; 40,000</td>
-                  <td>&#8358; 10,000 cr</td>
+                <tr v-for="(account, index) in Accounts" :key="index">
+                  <td>{{ account.number }}</td>
+                  <td>{{ account.name }}</td>
+                  <td>{{ account.type }}</td>
+                  <td>&#8358; {{ account.balance }}</td>
+                  <td>&#8358; 0</td>
                 </tr>
               </table>
             </div>
@@ -45,7 +46,7 @@
       <div class="middle-container">
         <div class="box">
           <p class="top transaction-title">Loan</p>
-          <p class="middle">&#8358;120,000</p>
+          <p class="middle">&#8358;0</p>
           <div class="card-icon">
             <img
               src="../../../assets/images/loan.svg"
@@ -57,7 +58,7 @@
         </div>
         <div class="box">
           <p class="top transaction-title">Investment</p>
-          <p class="middle">&#8358;170,000</p>
+          <p class="middle">&#8358;0</p>
           <div class="card-icon">
             <img
               src="../../../assets/images/invest.svg"
@@ -115,11 +116,24 @@
 </template>
 
 <script>
+//import { adminService } from "../../../services/AdminServices/admin.services";
+import Loader from "../../../utils/vue-loader/loader.vue";
+import { mapState } from "vuex";
+
 export default {
   name: "Account",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
-    return {};
+    return {
+      loading: false
+    };
+  },
+  computed: {
+    ...mapState({
+      Accounts: state => state.User.USER_DATA.account.accounts
+    })
   }
 };
 </script>
@@ -129,6 +143,11 @@ export default {
   background: $main-color;
   border: 1px solid $main-color;
   font-family: $SourceSansPro-Regular;
+}
+
+.account-container {
+  //max-height: 300px;
+  overflow-y: scroll;
 }
 
 .table-img {
